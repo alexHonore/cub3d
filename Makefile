@@ -6,7 +6,7 @@
 #    By: anshimiy <anshimiy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/21 13:39:11 by anshimiy          #+#    #+#              #
-#    Updated: 2022/11/21 13:41:43 by anshimiy         ###   ########.fr        #
+#    Updated: 2022/11/21 14:10:08 by anshimiy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,8 @@ endif
 SRCDIR = src/
 
 SRCS =  src/main.c			\
-
+		src/mlx.c			\
+		
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 RM = rm -rf

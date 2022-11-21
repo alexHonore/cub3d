@@ -6,7 +6,7 @@
 /*   By: anshimiy <anshimiy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:26:12 by anshimiy          #+#    #+#             */
-/*   Updated: 2022/11/21 13:54:27 by anshimiy         ###   ########.fr       */
+/*   Updated: 2022/11/21 16:43:04 by anshimiy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,41 +26,58 @@
 # include	<complex.h>
 # include	<fcntl.h>
 # include	<mlx.h>
+# include	"cub3d_struct.h"
 
-# define DBQUOTE 34
-# define SQUOTE 39
-# define PIPE 124
-# define SPACE 32
-# define DOLLAR 36
-# define DOUBLEPIPE 123
-# define DOUBLEAMPERSAND 125
-
-typedef enum e_shell_status {
+typedef enum e_game_status {
     RUNNING,
     OVER,
-} t_shell_status;
+} t_game_status;
 
 /* ****** STRUCTS ****** */
 
-typedef struct s_env
+
+
+typedef struct s_mlx
 {
-	char			*cmd;
-	char			*expand;
-	struct s_env	*next;
+	void	*mlx;
+	void	*win;
+	t_img	img;
+	int		init;
+} t_mlx;
 
-}					t_env;
-
-typedef struct s_shell
+typedef struct s_map
 {
-	char			*prompt;
-	char			**argv;
-	t_shell_status	shell_status;
-	int				size;
-	int				nb_cmd;
-	char			**envp;
-	t_env			*env;
+	t_img	back;
+	int		height;
+	int		width;
+	char	*tiles;
+	int		*tiles_coll;
+	int		size;
+	int		floor_color;
+	int		ceiling_color;
+} t_map;
 
-}					t_shell;
+typedef struct s_player
+{
+	t_pos	pos;
+	double	rot;
+	double	vel_r;
+	double	vel_l;
+	double	vel_u;
+	double	vel_d;
+	double	turn_l;
+	double	turn_r;
+} t_player;
+
+typedef struct s_game
+{
+	t_map			map;
+	t_player		player;
+	t_mlx			*mlx;
+	t_img			game_img;
+	t_img			texture[4];
+	t_resolution	res;
+} t_game;
 
 /* ****************************** FUNCTIONS ****************************** */
 
@@ -72,11 +89,9 @@ typedef struct s_shell
 
 /* ******     UTILS     ****** */
 
-/* ******      ENV      ****** */
-
-/* ******     LOGS      ****** */
-
-/* ******   EXECUTION   ****** */
-
+/* ******      MLX      ****** */
+void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
+int		exit_game(t_mlx mlx);
+int	key_release(int key, t_mlx mlx);
 
 #endif
